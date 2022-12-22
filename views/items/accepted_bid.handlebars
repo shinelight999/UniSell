@@ -1,0 +1,16 @@
+<div class="alert alert-success" role="alert">
+  Congratuations, you accepted a bid for ${{acceptedPrice}}! You can contact {{acceptedUsername}} at {{acceptedEmail}} to discuss futher. Thanks for using Unisell!
+</div>
+
+<p>Please take a moment to rate {{acceptedUsername}}:</p>
+
+<form action="/rate/{{userGivingRatingId}}/{{userGettingRatedId}}" method="POST" id="new-rating-form">
+  <div class="mb-3">
+    <label id="rating-label" for="rating" class="form-label">Rating</label>
+    <input id="rating" name="rating" type="number" min="1" max="5" class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-success">Submit Rating</button>
+</form>
+
+<a href="/items/{{id}}" class="btn btn-secondary">Back</a>

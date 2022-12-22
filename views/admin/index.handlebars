@@ -1,0 +1,23 @@
+<p class="error-status">{{error_status_code}}</p>
+<p class="error-message">{{error_messages}}</p>
+
+{{#if universitiesList}}
+  <table class="table">
+    <tr>
+      <th>Name</th>
+      <th>Domain</th>
+      <th>Edit</th>
+    </tr>
+    {{#each universitiesList}}
+      <tr>
+          <td>{{ this.name }}</td>
+          <td>{{ this.emailDomain }}</td>
+          <td><a href="/admin/universities/{{this._id}}/edit">Edit</a></td>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>There are no universities yet. Click "Add" to create one.</p>
+{{/if}}
+
+<a href="/admin/universities/new" class="btn btn-success">Add</a>

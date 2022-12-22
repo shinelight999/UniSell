@@ -1,0 +1,28 @@
+<div id="success-alert" class="alert alert-success" role="alert"></div>
+<div id="error-alert" class="alert alert-danger" role="alert"></div>
+
+<input id="itemId" type="hidden" value="{{id}}"/>
+<div class="container" id="photos-preview"></div>
+
+<hr>
+
+<h2>Add Photo</h2>
+
+<form action="/items/{{id}}/photo" method="POST" id="add-photo-form">
+    <div class="mb-3">
+        <label id="description-label" for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" rows="3" cols="30" class="form-control"></textarea>
+    </div>
+
+    <div class="mb-3">
+        <label id="image-label" for="image">Photo</label>
+        <input id="image" type="file" name="image" accept="image/*"/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Add photo</button>
+</form>
+
+<a href="/items/{{id}}" class="btn btn-primary">Go back</a>
+<a href="/" class="btn btn-secondary">Home</a>
+
+<script src="/public/js/editPhotos.js" type="module"></script>

@@ -1,0 +1,30 @@
+<p class="error-status" id="error-status">{{error_status_code}}</p>
+<p class="error-message" id="error-message">{{error_messages}}</p>
+
+<form action="/auth/login" method="POST" id="login-form">
+
+    <div class="mb-3">
+        <label for="universityId" class="form-label">Select your university:</label>
+
+        <select name="universityId" id="universityId" class="form-select">
+            {{#each universitiesList}}
+                <option value="{{this._id}}">{{ this.name }}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label id="user-label" for="username" class="form-label">Username</label>
+        <input id="username" name="username" class="form-control" value="{{username}}" />
+    </div>
+
+    <div class="mb-3">
+        <label id="password-label" for="password" class="form-label">Password</label>
+        <input id="password" type="password" name="password" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Login</button>
+</form>
+
+<a href="/auth/signup" class="btn btn-primary">Don't have an account? Signup here!</a>
+<a href="/" class="btn btn-secondary">Home</a>

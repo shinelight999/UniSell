@@ -1,0 +1,18 @@
+<p class="error-status" id="error-status">{{error_status_code}}</p>
+<p class="error-message" id="error-message">{{error_messages}}</p>
+
+<form action="/admin/universities" method="POST" id="new-university-form">
+    <div class="mb-3">
+        <label for="name" class="form-label">Name</label>
+        <input id="name" name="name" value="{{name}}" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="emailDomain" class="form-label">Email Domain</label>
+        <input id="emailDomain" name="emailDomain" value="{{emailDomain}}" class="form-control"/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Create New University</button>
+</form>
+
+<a href="/admin" class="btn btn-secondary">Back</a>

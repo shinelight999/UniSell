@@ -1,0 +1,187 @@
+{{#if hasAcceptedBid}}
+<div class="card">
+  <div class="card-body">
+    <div class="alert alert-success" role="alert">
+      Congratuations, your bid was accepted for ${{hasAcceptedBid.price}}! You can contact {{hasAcceptedBid.username}}
+      at {{hasAcceptedBid.email}} to discuss futher. Thanks for using Unisell!
+    </div>
+
+    <p>Please take a moment to rate {{hasAcceptedBid.username}}:</p>
+
+    <form action="/rate/{{hasAcceptedBid.userGivingRatingId}}/{{hasAcceptedBid.userGettingRatedId}}" method="POST"
+      id="new-rating-form">
+      <div class="mb-3">
+        <label id="rating-label" for="rating" class="form-label">Rating</label>
+        <input id="rating" name="rating" type="number" min="1" max="5" class="form-control">
+      </div>
+
+      <button type="submit" class="btn btn-success">Submit Rating</button>
+    </form>
+  </div>
+</div>
+<br>
+{{/if}}
+
+<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    {{#if item.photos}}
+    {{#each item.photos}}
+    <div class="carousel-item {{#if @first }}active {{/if}}">
+      <img class="carousel_image" src="{{this.imageUrl}}" alt="{{this.description}}">
+
+      <div class="carousel-caption d-none d-md-block">
+        <h2>{{this.description}}</h2>
+      </div>
+    </div>
+    {{/each}}
+
+  </div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="sr-only">Next</span>
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+  </a>
+
+  {{else}}
+  {{#if canEdit}}
+  <div class="carousel-empty">
+    <h3>There are no images yet. <a href="/items/{{itemId}}/editPhotos" class="btn btn-primary">Click here</a> to add!
+    </h3>
+  </div>
+  {{else}}
+  <div class="carousel-empty">
+    <h3>Ask the owner in the comments to add photos</h3>
+  </div>
+  {{/if}}
+  {{/if}}
+
+</div>
+
+<hr>
+
+<h2>Description:</h2>
+<p>{{item.description}}</p>
+
+<h2>Price:</h2>
+<p>${{item.price}}</p>
+
+<h2>Keywords:</h2>
+<p>{{keywords}}</p>
+
+<h2>Pick Up Method:</h2>
+<p>{{item.pickUpMethod}}</p>
+
+<h2>Listed By:</h2>
+<div class="d-flex">
+  <img src="{{user.profileImageUrl}}" alt="{{username}}" class="me-3 rounded-circle"
+    style="width: 60px; height: 60px;" />
+  <div>
+    <h3 class="fw-bold">
+      {{user.username}}
+    </h3>
+    <p>
+      Bio: {{user.bio}}
+    </p>
+    <p>
+      Rating: {{avgRating}}
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h4>Comments</h4>
+      </div>
+      <div class="card-body">
+        {{#unless comments}}
+        <p id="no_comment_notice">There are no comments yet. Be the first to add one below!</p>
+        {{/unless}}
+        <div id="comments-list">
+          {{#if comments}}
+          {{#each comments}}
+          <div class="d-flex">
+            <img src="{{photo}}" alt="{{username}}" class="me-3 rounded-circle" style="width: 60px; height: 60px;" />
+            <div>
+              <h3 class="fw-bold">{{username}}</h3>
+              <p>{{text}}</p>
+            </div>
+          </div>
+          <hr>
+          {{/each}}
+          {{/if}}
+        </div>
+
+        <h4>Add a comment</h4>
+        <div id="error-alert-comment" class="alert alert-danger" role="alert" hidden></div>
+
+        <form action="/items/{{itemId}}/comment" method="POST" id="new-comment-form">
+          <div class="mb-3">
+            <label id="comment-label" for="comment" class="form-label">Comment text</label>
+            <textarea id="comment" name="comment" rows="5" cols="30" class="form-control"></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success">Post Comment</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <div class="card-header">
+        <h4>Bids</h4>
+        <p>Highest Bid: $<span id="highest_bid">{{highest_bid}}</span></p>
+      </div>
+      <div class="card-body">
+        {{#unless bids}}
+        {{#unless canEdit}}
+        <p id="no_bids_notice">Interested in this item? Leave a bid!</p>
+        {{/unless}}
+        {{/unless}}
+        <div id="bids-list">
+          {{#if bids}}
+          {{#each bids}}
+          <div class="d-flex">
+            <img src="{{photo}}" alt="{{username}}" class="me-3 rounded-circle" style="width: 60px; height: 60px;" />
+            <div>
+              <h3 class="fw-bold">{{username}}</h3>
+              <p>${{price}}</p>
+            </div>
+          </div>
+          <hr>
+          {{/each}}
+          {{/if}}
+        </div>
+
+        {{#if canEdit}}
+        <a href="/items/{{itemId}}/manage_bids" class="btn btn-success">Manage Bids</a>
+        {{else}}
+        <h4>Add a bid</h4>
+        <div id="error-alert-bid" class="alert alert-danger" role="alert" hidden></div>
+
+        <form action="/items/{{itemId}}/bid" method="POST" id="new-bid-form">
+          <div class="mb-3">
+            <label id="bid-label" for="bid" class="form-label">Bid amount</label>
+            <input id="bid" name="bid" type="number" class="form-control">
+          </div>
+
+          <button type="submit" class="btn btn-success">Submit Bid</button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+
+{{#if canEdit}}
+<a href="/items/{{itemId}}/edit" class="btn btn-primary">Edit Item</a>
+<a href="/items/{{itemId}}/editPhotos" class="btn btn-primary">Edit Photos</a>
+{{/if}}
+
+<a href="/" class="btn btn-secondary">Back</a>

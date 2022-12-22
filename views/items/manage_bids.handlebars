@@ -1,0 +1,20 @@
+{{#if bids}}
+  <table class="table">
+    <tr>
+      <th>Username</th>
+      <th>Bid Price</th>
+      <th>Action</th>
+    </tr>
+    {{#each bids}}
+      <tr>
+          <td>{{ this.username }} (Rating: {{this.rating}})</td>
+          <td>${{ this.price }}</td>
+          <td><a href="/items/{{this.id}}/bids/{{this.bidId}}/accept">Accept Bid</a></td>
+      </tr>
+    {{/each}}
+  </table>
+{{else}}
+  <p>There are no bids for this item yet</p>
+{{/if}}
+
+<a href="/items/{{id}}" class="btn btn-secondary">Back</a>

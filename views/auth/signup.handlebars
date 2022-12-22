@@ -1,0 +1,58 @@
+<p class="error-status" id="error-status">{{error_status_code}}</p>
+<p class="error-message" id="error-message">{{error_messages}}</p>
+
+<form action="/auth/signup" method="POST" id="signup-form">
+    <div class="mb-3">
+        <label for="universityId" class="form-label">Select your university:</label>
+
+        <select name="universityId" id="universityId" class="form-select">
+            {{#each universitiesList}}
+                <option value="{{this._id}}">{{ this.name }}</option>
+            {{/each}}
+        </select>
+        <div class="form-text">Don't see your university on this list? Tell your school to join Unisell!</div>
+    </div>
+
+    <div class="mb-3">
+        <label id="user-label" for="username" class="form-label">Username</label>
+        <input id="username" name="username" class="form-control" value="{{username}}" />
+        <div class="form-text">Username must be at least 4 characters and can only be alphanumeric characters</div>
+    </div>
+
+    <div class="mb-3">
+        <label id="password-label" for="password" class="form-label">Password</label>
+        <input id="password" type="password" name="password" class="form-control" />
+        <div class="form-text">Password must be at least 6 characters and cannot contain spaces</div>
+    </div>
+
+    <div class="mb-3">
+        <label id="password-confirmation-label" for="password_confirmation" class="form-label">Confirm Password</label>
+        <input id="password_confirmation" type="password" name="password_confirmation" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label id="name-label" for="name" class="form-label">Name</label>
+        <input id="name" name="name" class="form-control" value="{{name}}" />
+    </div>
+
+    <div class="mb-3">
+        <label id="email-label" for="email" class="form-label">Email</label>
+        <input id="email" type="email" name="email" class="form-control" value="{{email}}" />
+    </div>
+
+    <div class="mb-3">
+        <label id="bio-label" for="bio" class="form-label">Bio</label>
+        <textarea id="bio" name="bio" rows="5" cols="30" class="form-control">{{bio}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label id="image-label" for="image">Profile image</label>
+        <input id="image" type="file" name="image" accept="image/*"/>
+        <input id="imageURL" type="hidden" name="imageURL"/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Sign Up</button>
+</form>
+
+<a href="/auth/login" class="btn btn-primary">Already have an account? Click here to log-in</a>
+<a href="/" class="btn btn-secondary">Home</a>

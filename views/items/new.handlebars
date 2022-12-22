@@ -1,0 +1,36 @@
+<p class="error-status" id="error-status">{{error_status_code}}</p>
+<p class="error-message" id="error-message">{{error_messages}}</p>
+
+<form action="/items" method="POST" id="new-item-form">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input id="title" name="item_title" value="{{item_title}}" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea id="description" name="description" rows="5" cols="30" class="form-control">{{description}}</textarea>
+    </div>
+
+    <div class="mb-3">
+        <label for="keywords" class="form-label">Keywords</label>
+        <input id="keywords" name="keywords" value="{{keywords}}" class="form-control" />
+        <div class="form-text">Keywords must be comma seperated</div>
+    </div>
+
+    <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <input id="price" name="price" type="number" value="{{price}}" class="form-control"/>
+    </div>
+
+    <div class="mb-3">
+        <label for="pick_up_method" class="form-label">Pick Up Method</label>
+        <input id="pick_up_method" name="pickUpMethod" value="{{pickUpMethod}}" class="form-control"/>
+    </div>
+
+    {{!-- photos! --}}
+
+    <button type="submit" class="btn btn-success">Create New Item</button>
+</form>
+
+<a href="/" class="btn btn-secondary">Back</a>

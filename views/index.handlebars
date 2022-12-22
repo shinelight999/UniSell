@@ -1,0 +1,77 @@
+{{#if user}}
+    <p class="error-status">{{error_status_code}}</p>
+    <p class="error-message">{{error_messages}}</p>
+
+    <form action="/search" method="POST" id="search-item-form">
+
+        <div class="mb-3">
+            <label for="search_term" class="form-label">Search by keyword</label>
+            <input id="search_term" placeholder="headphones" name="search_term" class="form-control"/>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Search Items</button>
+    </form>
+
+    <hr>
+
+    <h2>Browsing {{universityName}} items:</h2>
+
+    {{#if acceptedBids}}
+        {{#each acceptedBids}}
+            <div class="alert alert-primary" role="alert">
+                Congratuations, you have an accepted bid on {{this.title}}! <a href="/items/{{this._id}}">View the item</a> to contact the seller.
+            </div>
+        {{/each}}
+    {{/if}}
+
+    {{#if itemsList}}
+        <div class="item-list">
+            {{#each itemsList}}
+                <div class="card" style="width: 18rem;">
+                    <img src="{{this.imageURL}}" class="card-img-top" alt="{{this.title}}">
+                    <div class="card-body">
+                        <h2 class="card-title">{{this.title}}</h2>
+                        <p class="card-text">{{this.description}}</p>
+                        <a href="/items/{{this._id}}" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <p>There are no items yet. Click "List New Item" to add one.</p>
+    {{/if}}
+{{else}}
+    <hr>
+    <h2>What is Unisell?</h2>
+    <p>Unisell is a used-item marketplace exclusive to university students. Verified university students can buy or sell used
+    items.</p>
+    <hr>
+    <h2>Our goal</h2>
+    <p>Unisell is designed to improve college communities and promote reuse of items by providing a platform where students
+    can safely interact.</p>
+    <hr>
+    <h2>How does Unisell work?</h2>
+    <p>To join us, all you need is your student email address.
+        Once you create an account, you can post or buy items.
+    </p>
+        <p>Purchasing items:</p>
+        <ol>
+            <li>Leave a comment on the post you wish to purchase if you have any questions.</li>
+            <li>Create a bid.</li>
+            <li>You will be notified if your bid is accepted.</li>
+        </ol>
+        <p>Selling items:</p>
+        <ol>
+            <li>Create a post with photos, keywords, descriptions, etc.</li>
+            <li>Accept a bid that you like.</li>
+            <li>Communicate with the buyer to decide when and where to meet.</li>
+        </ol>
+        <p>*Note that all transactions happen on campus.</p>
+    <hr>
+    <h2>Participating Universities:</h2>
+    {{#each universityList}}
+      <ul>
+          <li>{{ this }}</li>
+      </ul>
+    {{/each}}
+{{/if}}

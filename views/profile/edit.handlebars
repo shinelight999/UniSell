@@ -1,0 +1,66 @@
+<p class="error-status" id="error-status">{{error_status_code}}</p>
+<p class="error-message" id="error-message">{{error_messages}}</p>
+
+<h2>Edit Info</h2>
+
+<form action="/profile/edit" method="POST" id="profile-form">
+    <input name="_method" type="hidden" value="PUT" />
+
+    <div class="mb-3">
+        <label id="user-label" for="username" class="form-label">Username</label>
+        <input id="username" name="username" class="form-control" value="{{username}}" />
+        <div class="form-text">Username must be at least 4 characters and can only be alphanumeric characters</div>
+    </div>
+
+    <div class="mb-3">
+        <label id="name-label" for="name" class="form-label">Name</label>
+        <input id="name" name="name" class="form-control" value="{{name}}"/>
+    </div>
+
+    <div class="mb-3">
+        <label id="email-label" for="email" class="form-label">Email</label>
+        <input id="email" type="email" name="email" class="form-control" value="{{email}}"/>
+    </div>
+
+    <div class="mb-3">
+        <label id="bio-label" for="bio" class="form-label">Bio</label>
+        <textarea id="bio" name="bio" rows="5" cols="30" class="form-control">{{bio}}</textarea>
+    </div>
+
+    <img class="img-thumbnail rounded" alt="profile picture" src="{{imageURL}}"  width="304" height="236" />
+
+    <div class="mb-3">
+        <label id="image-label" for="image">Profile image</label>
+        <input id="image" type="file" name="image" accept="image/*"/>
+        <input id="imageURL" type="hidden" name="imageURL"/>
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Profile</button>
+</form>
+
+<hr>
+
+<h2>Edit Password</h2>
+<form action="/profile/edit/password" method="POST" id="password-form">
+    <input name="_method" type="hidden" value="PUT" />
+
+    <div class="mb-3">
+        <label id="current_password-label" for="current_password" class="form-label">Current Password</label>
+        <input id="current_password" type="password" name="current_password" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label id="new_password-label" for="new_password" class="form-label">New password</label>
+        <input id="new_password" type="password" name="new_password" class="form-control" />
+        <div class="form-text">Password must be at least 6 characters and cannot contain spaces</div>
+    </div>
+
+    <div class="mb-3">
+        <label id="new_password-confirmation-label" for="new_password_confirmation" class="form-label">Re-type new password</label>
+        <input id="new_password_confirmation" type="password" name="new_password_confirmation" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Password</button>
+</form>
+
+<a href="/" class="btn btn-secondary">Home</a>
