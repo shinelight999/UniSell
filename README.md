@@ -1,4 +1,4 @@
-# cs546_w2_final_project_2022
+# UniSell
 
 # Contributors: 
   <li>Derek Williamson</li>
